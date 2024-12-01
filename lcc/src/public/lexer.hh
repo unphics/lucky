@@ -18,11 +18,17 @@ enum class token_kind {
     eof,
 };
 
+struct src_loc {
+    int line;
+    int col;
+};
+
 class token {
 public:
     token_kind kind;
     int value;
     ::std::string content;
+    src_loc loc;
 };
 
 class lexer {
@@ -30,14 +36,18 @@ public:
     lexer(const char* code);
     void get_next_token();
     void get_next_char();
+    void expect_token(token_kind kind);
     ::std::shared_ptr<token> cur_token;
+    ::std::string src_code;
 private:
     bool is_letter();
     bool is_digit();
     bool is_letter_or_digit();
-    ::std::string src_code;
+    const char* get_token_simple_spelling(token_kind kind);
     char cur_char{' '};
     int cursor{0};
+    int line{0};
+    int line_head{0};
 };
 
 #endif

@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "lexer.hh";
+#include "lexer.hh"
 #include "parser.hh"
 #include "print_visitor.hh"
 #include "code_gen.hh"
 
-const char* code = " a= 3; a; 5 + a + (1 -3)* 4  /2 ; ";
+const char* code = "a= 3; a; 5 + a + (1 -3)* 4  /2 ; ";
 
 void test_lex();
 void test_parser();
@@ -15,8 +15,8 @@ int main(int argc, char** argv) {
     std::cout << "hello world!" << std::endl;
 
     // test_lex();
-    // test_parser();
-    test_code_gen();
+    test_parser();
+    // test_code_gen();
 
     return 0;
 }
@@ -25,7 +25,7 @@ void test_lex() {
     lexer lex(code);
     do {
         lex.get_next_token();
-        ::printf("token : %s\n", lex.cur_token->content.c_str());
+        ::printf("token: _%s_, line: %d, col: %d\n", lex.cur_token->content.c_str(), lex.cur_token->loc.line, lex.cur_token->loc.col);
     } while (lex.cur_token->kind != token_kind::eof);
 }
 

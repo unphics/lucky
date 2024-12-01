@@ -1,5 +1,6 @@
 #include "parser.hh"
 
+#include "diag.hh"
 #include <cassert>
 
 parser::parser(lexer& lex) : lex(lex) {}
@@ -60,7 +61,7 @@ parser::parser(lexer& lex) : lex(lex) {}
     if (this->lex.cur_token->kind == token_kind::lparen) {
         this->lex.get_next_token();
         auto node = this->parse_expr();
-        this->lex.get_next_token();
+        this->lex.expect_token(token_kind::rparen);
         return node;
     } else if (this->lex.cur_token->kind == token_kind::num) {
         auto node = ::std::make_shared<const_node>();
@@ -77,9 +78,10 @@ parser::parser(lexer& lex) : lex(lex) {}
         this->lex.get_next_token();
         return node;
     } else {
-        ::printf("not support !!!");
+        diagE(this->lex.src_code, this->lex.cur_token->loc.line, this->lex.cur_token->loc.col, "not support node");
         assert(0);
     }
+    return nullptr;
 }
 
 ::std::shared_ptr<ast_node> parser::parse_assign_expr() {
