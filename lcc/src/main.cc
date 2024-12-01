@@ -5,7 +5,7 @@
 #include "print_visitor.hh"
 #include "code_gen.hh"
 
-const char* code = " 5 + (1 -3)* 4  /2";
+const char* code = " a= 3; a; 5 + a + (1 -3)* 4  /2 ; ";
 
 void test_lex();
 void test_parser();
@@ -29,13 +29,14 @@ void test_lex() {
     } while (lex.cur_token->kind != token_kind::eof);
 }
 
-void test_parser() {
+void test_parser() { 
     lexer lex(code);
     lex.get_next_token();
     parser parser(lex);
     print_visitor visitor;
-    auto root =parser.parse();
+    auto root = parser.parse();
     root->accept(&visitor);
+    ::std::cout << visitor.content << ::std::endl;
 }
 
 void test_code_gen() {

@@ -1,0 +1,11 @@
+[
+{
+  "directory": "/home/tx4_wsl_zys/root/proj/lucky/lcc",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-std=c++20", "-Isrc/public", "-Isrc", "-DNDEBUG", "-o", "build/.objs/lucky/linux/x86_64/release/src/private/lexer.cc.o", "src/private/lexer.cc"],
+  "file": "src/private/lexer.cc"
+},
+{
+  "directory": "/home/tx4_wsl_zys/root/proj/lucky/lcc",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-std=c++20", "-Isrc/public", "-Isrc", "-DNDEBUG", "-o", "build/.objs/lucky/linux/x86_64/release/src/main.cc.o", "src/main.cc"],
+  "file": "src/main.cc"
+}]
